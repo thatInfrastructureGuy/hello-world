@@ -1,44 +1,14 @@
 kind: pipeline
-type: docker
-name: foo
+type: kubernetes
+name: greeting
 
 steps:
-- name: foo
+- name: en
   image: alpine
   commands:
-  - echo this should never run if branch is develop
-  - echo the current branch is $DRONE_BRANCH
+  - echo hello world
 
-- name: bar
+- name: fr
   image: alpine
   commands:
-  - echo this should never run if branch is master
-  - echo the current branch is $DRONE_BRANCH
-  when:
-    branch:
-      exclude:
-      - master
-  
-
-trigger:
-  branch:
-    exclude:
-    - develop
-
----
-
-kind: pipeline
-type: docker
-name: bar
-
-steps:
-- name: foo
-  image: alpine
-  commands:
-  - echo this should never run if branch is master
-  - echo the current branch is $DRONE_BRANCH
-
-trigger:
-  branch:
-    exclude:
-    - master
+  - echo bonjour monde
